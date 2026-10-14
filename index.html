@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b12">
+  <meta name="description" content="Welcome to my personal portfolio website.">
+  <title>Carona PVP | Personal Portfolio</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #080b12;
+      --panel: #101522;
+      --text: #f4f6ff;
+      --muted: #a3abc0;
+      --accent: #8b7bff;
+      --cyan: #54e7e7;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .glow {
+      position: fixed;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: .18;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .glow.one { background: var(--accent); top: 0; left: -140px; }
+    .glow.two { background: var(--cyan); right: -150px; top: 45%; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(8, 11, 18, .85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo { font-weight: 800; font-size: 1.25rem; letter-spacing: 1px; }
+    .logo span { color: var(--accent); }
+
+    .nav-links { display: flex; gap: 22px; font-size: .92rem; color: var(--muted); }
+    .nav-links a:hover { color: var(--cyan); }
+
+    .hero {
+      max-width: 1100px;
+      min-height: 78vh;
+      margin: auto;
+      padding: 100px 24px 80px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-content { max-width: 780px; animation: rise .9s ease both; }
+
+    .tag {
+      display: inline-block;
+      border: 1px solid rgba(139,123,255,.5);
+      color: var(--cyan);
+      padding: 7px 13px;
+      border-radius: 99px;
+      font-size: .82rem;
+      margin-bottom: 24px;
+      background: rgba(139,123,255,.08);
+    }
+
+    h1 { font-size: clamp(2.8rem, 8vw, 5.8rem); line-height: 1.08; letter-spacing: -3px; }
+    h1 span {
+      background: linear-gradient(100deg, var(--accent), var(--cyan));
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .hero p { color: var(--muted); max-width: 620px; margin: 24px 0 30px; font-size: 1.08rem; }
+
+    .buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(139,123,255,.22); }
+    .primary { background: linear-gradient(100deg, var(--accent), #6755e8); }
+    .secondary { border: 1px solid #343b50; background: var(--panel); }
+
+    section { max-width: 1100px; margin: auto; padding: 75px 24px; scroll-margin-top: 75px; }
+    .section-label { color: var(--cyan); text-transform: uppercase; letter-spacing: 3px; font-size: .78rem; font-weight: bold; }
+    h2 { font-size: clamp(2rem, 5vw, 3rem); margin: 8px 0 22px; letter-spacing: -1px; }
+    .section-intro { color: var(--muted); max-width: 650px; margin-bottom: 30px; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+
+    .card {
+      background: linear-gradient(145deg, rgba(20,26,42,.95), rgba(12,16,27,.95));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      padding: 26px;
+      transition: transform .25s, border-color .25s;
+    }
+
+    .card:hover { transform: translateY(-6px); border-color: rgba(139,123,255,.65); }
+    .card .icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .card h3 { margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: .95rem; }
+
+    .gallery-placeholder {
+      min-height: 150px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: radial-gradient(circle at top right, #39336a, #111827 65%);
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .contact-box {
+      padding: clamp(25px, 5vw, 55px);
+      border: 1px solid rgba(139,123,255,.35);
+      border-radius: 24px;
+      background: linear-gradient(130deg, rgba(139,123,255,.10), rgba(84,231,231,.04));
+    }
+
+    footer { text-align: center; color: var(--muted); padding: 35px 20px; border-top: 1px solid rgba(255,255,255,.08); }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 700px) {
+      nav { padding: 15px 18px; }
+      .nav-links { gap: 12px; font-size: .8rem; }
+      .hero { min-height: 70vh; padding-top: 75px; }
+      h1 { letter-spacing: -1.5px; }
+      .cards { grid-template-columns: 1fr; }
+      section { padding: 55px 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+
+  <header>
+    <nav>
+      <a class="logo" href="#home">CARONA<span>.</span>PVP</a>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <span class="tag">✦ Welcome to my digital world</span>
+        <h1>Ideas into<br><span>experiences.</span></h1>
+        <p>Hello! I'm Mahesh. This is my personal space to share my interests, ideas, and journey. Explore and get to know me.</p>
+        <div class="buttons">
+          <a class="btn primary" href="#about">Discover more ↗</a>
+          <a class="btn secondary" href="#contact">Get in touch</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="reveal">
+      <div class="section-label">A little about me</div>
+      <h2>Curious by nature.</h2>
+      <p class="section-intro">I'm always interested in learning new things, exploring technology, and turning ideas into something useful. This website is a small window into my world.</p>
+      <div class="cards">
+        <article class="card">
+          <div class="icon">⌘</div>
+          <h3>Technology</h3>
+          <p>Exploring technology, coding, and digital creativity.</p>
+        </article>
+        <article class="card">
+          <div class="icon">✧</div>
+          <h3>Learning</h3>
+          <p>Building skills, discovering ideas, and improving every day.</p>
+        </article>
+        <article class="card">
+          <div class="icon">◎</div>
+          <h3>Creativity</h3>
+          <p>Enjoying fresh ideas and finding new ways to express them.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="gallery" class="reveal">
+      <div class="section-label">Selected moments</div>
+      <h2>My gallery.</h2>
+      <p class="section-intro">A space for photos, memories, and things that inspire me. You can add your own pictures here later.</p>
+      <div class="cards">
+        <article class="card">
+          <div class="gallery-placeholder">✦</div>
+          <h3>My world</h3>
+          <p>Moments that make life special.</p>
+        </article>
+        <article class="card">
+          <div class="gallery-placeholder">⌁</div>
+          <h3>My journey</h3>
+          <p>Learning something new, one day at a time.</p>
+        </article>
+        <article class="card">
+          <div class="gallery-placeholder">✧</div>
+          <h3>Inspiration</h3>
+          <p>Ideas that encourage me to keep growing.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="reveal">
+      <div class="contact-box">
+        <div class="section-label">Let's connect</div>
+        <h2>Have something in mind?</h2>
+        <p class="section-intro">I'd be happy to hear from you. Add your preferred contact details and social links when you're ready.</p>
+        <a class="btn primary" href="mailto:">Email me ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Designed with curiosity. © <span id="year"></span> Mahesh</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>
