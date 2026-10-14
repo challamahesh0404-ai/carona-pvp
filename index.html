@@ -44,6 +44,24 @@
 
     .glow.one { background: var(--accent); top: 0; left: -140px; }
     .glow.two { background: var(--cyan); right: -150px; top: 45%; }
+    @keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.14;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.26;
+    transform: scale(1.12);
+  }
+}
+
+.glow.one {
+  animation: glowPulse 8s ease-in-out infinite;
+}
+
+.glow.two {
+  animation: glowPulse 10s ease-in-out infinite reverse;
+}
 
     header {
       position: sticky;
@@ -79,7 +97,15 @@
       align-items: center;
     }
 
-    .hero-content { max-width: 780px; animation: rise .9s ease both; }
+.hero-content {
+  max-width: 780px;
+  animation: rise .9s ease both, floatHero 6s ease-in-out 1s infinite;
+}
+
+@keyframes floatHero {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
 
     .tag {
       display: inline-block;
@@ -112,7 +138,38 @@
       transition: transform .2s, box-shadow .2s;
     }
 
-    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(139,123,255,.22); }
+  .btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 22px rgba(139,123,255,.35),
+              0 0 40px rgba(84,231,231,.12);
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 70%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255,255,255,.18),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left .6s ease;
+  pointer-events: none;
+}
+
+.btn:hover::after {
+  left: 150%;
+}
     .primary { background: linear-gradient(100deg, var(--accent), #6755e8); }
     .secondary { border: 1px solid #343b50; background: var(--panel); }
 
@@ -131,7 +188,12 @@
       transition: transform .25s, border-color .25s;
     }
 
-    .card:hover { transform: translateY(-6px); border-color: rgba(139,123,255,.65); }
+   .card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(139,123,255,.85);
+  box-shadow: 0 12px 35px rgba(139,123,255,.18),
+              0 0 18px rgba(84,231,231,.08);
+}
     .card .icon { font-size: 1.8rem; margin-bottom: 12px; }
     .card h3 { margin-bottom: 8px; }
     .card p { color: var(--muted); font-size: .95rem; }
