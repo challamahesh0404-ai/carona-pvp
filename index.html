@@ -1,79 +1,105 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080b12">
-  <meta name="description" content="Welcome to my personal portfolio website.">
-  <title>Carona PVP | Personal Portfolio</title>
+  <meta name="theme-color" content="#080b18">
+  <meta name="description" content="Carona PVP — Ideas into experiences.">
+  <title>CARONA.PVP | Ideas into experiences</title>
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
-      --bg: #080b12;
-      --panel: #101522;
-      --text: #f4f6ff;
-      --muted: #a3abc0;
+      --bg: #080b18;
+      --panel: rgba(19, 24, 46, 0.78);
+      --text: #f4f5ff;
+      --muted: #a5acc8;
       --accent: #8b7bff;
       --cyan: #54e7e7;
+      --border: rgba(255,255,255,0.11);
     }
 
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
 
     body {
-      background: var(--bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(ellipse at 15% 10%, #171735 0, transparent 40%),
+        radial-gradient(ellipse at 90% 45%, #102536 0, transparent 35%),
+        var(--bg);
       color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.7;
-      overflow-x: hidden;
+      line-height: 1.6;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-    .glow {
+    /* Animated background effects */
+    .background-glow {
       position: fixed;
       width: 340px;
       height: 340px;
       border-radius: 50%;
-      filter: blur(110px);
-      opacity: .18;
+      filter: blur(100px);
+      opacity: 0.15;
+      pointer-events: none;
       z-index: 0;
+      animation: glowPulse 9s ease-in-out infinite alternate;
+    }
+
+    .glow-one {
+      background: var(--accent);
+      top: 0;
+      left: -150px;
+    }
+
+    .glow-two {
+      background: var(--cyan);
+      right: -160px;
+      top: 45%;
+      animation-delay: -4s;
+    }
+
+    /* Particle canvas: sits above the background and behind content */
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
       pointer-events: none;
     }
 
-    .glow.one { background: var(--accent); top: 0; left: -140px; }
-    .glow.two { background: var(--cyan); right: -150px; top: 45%; }
-    @keyframes glowPulse {
-  0%, 100% {
-    opacity: 0.14;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.26;
-    transform: scale(1.12);
-  }
-}
+    .site {
+      position: relative;
+      z-index: 2;
+    }
 
-.glow.one {
-  animation: glowPulse 8s ease-in-out infinite;
-}
-
-.glow.two {
-  animation: glowPulse 10s ease-in-out infinite reverse;
-}
-
+    /* Navigation */
     header {
       position: sticky;
       top: 0;
       z-index: 10;
-      background: rgba(8, 11, 18, .85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(8, 11, 24, 0.78);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px);
     }
 
-    nav {
-      max-width: 1100px;
+    .nav {
+      max-width: 1120px;
       margin: auto;
       padding: 18px 24px;
       display: flex;
@@ -82,321 +108,553 @@
       gap: 20px;
     }
 
-    .logo { font-weight: 800; font-size: 1.25rem; letter-spacing: 1px; }
-    .logo span { color: var(--accent); }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+    }
 
-    .nav-links { display: flex; gap: 22px; font-size: .92rem; color: var(--muted); }
-    .nav-links a:hover { color: var(--cyan); }
+    .logo span {
+      color: var(--cyan);
+    }
 
-    .hero {
-      max-width: 1100px;
-      min-height: 78vh;
-      margin: auto;
-      padding: 100px 24px 80px;
+    .nav-links {
       display: flex;
       align-items: center;
+      gap: 25px;
+      flex-wrap: wrap;
     }
 
-.hero-content {
-  max-width: 780px;
-  animation: rise .9s ease both, floatHero 6s ease-in-out 1s infinite;
-}
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.94rem;
+      transition: color 0.25s ease;
+    }
 
-@keyframes floatHero {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-    .tag {
-      display: inline-block;
-      border: 1px solid rgba(139,123,255,.5);
+    .nav-links a:hover {
       color: var(--cyan);
-      padding: 7px 13px;
-      border-radius: 99px;
-      font-size: .82rem;
-      margin-bottom: 24px;
-      background: rgba(139,123,255,.08);
     }
 
-    h1 { font-size: clamp(2.8rem, 8vw, 5.8rem); line-height: 1.08; letter-spacing: -3px; }
-    h1 span {
+    /* Main content */
+    main, .section {
+      width: min(1120px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .hero {
+      min-height: 75vh;
+      display: flex;
+      align-items: center;
+      padding-block: 100px 80px;
+    }
+
+    .hero-content {
+      max-width: 780px;
+      animation: rise 0.9s ease both,
+                 floatHero 6s ease-in-out 1s infinite;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--cyan);
+      border: 1px solid rgba(84, 231, 231, 0.3);
+      background: rgba(84, 231, 231, 0.06);
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      letter-spacing: 1.5px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 7vw, 5.7rem);
+      line-height: 1.06;
+      letter-spacing: -3px;
+      margin-bottom: 25px;
+    }
+
+    .gradient-text {
       background: linear-gradient(100deg, var(--accent), var(--cyan));
       color: transparent;
       background-clip: text;
       -webkit-background-clip: text;
     }
 
-    .hero p { color: var(--muted); max-width: 620px; margin: 24px 0 30px; font-size: 1.08rem; }
+    .hero p {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      margin-bottom: 30px;
+    }
 
-    .buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
 
     .btn {
-      display: inline-block;
-      padding: 12px 20px;
-      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 12px 22px;
+      border-radius: 12px;
       font-weight: 700;
-      transition: transform .2s, box-shadow .2s;
+      border: 1px solid var(--border);
+      transition: transform 0.25s ease,
+                  box-shadow 0.25s ease,
+                  border-color 0.25s ease;
     }
 
-  .btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 22px rgba(139,123,255,.35),
-              0 0 40px rgba(84,231,231,.12);
-}
+    .btn-primary {
+      color: #080b18;
+      background: linear-gradient(110deg, var(--accent), var(--cyan));
+      border: none;
+    }
 
-.btn {
-  position: relative;
-  overflow: hidden;
-}
+    .btn-secondary {
+      background: rgba(255,255,255,0.035);
+    }
 
-.btn::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -120%;
-  width: 70%;
-  height: 100%;
-  background: linear-gradient(
-    100deg,
-    transparent,
-    rgba(255,255,255,.18),
-    transparent
-  );
-  transform: skewX(-20deg);
-  transition: left .6s ease;
-  pointer-events: none;
-}
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 22px rgba(139,123,255,0.35),
+                  0 0 40px rgba(84,231,231,0.12);
+    }
 
-.btn:hover::after {
-  left: 150%;
-}
-    .primary { background: linear-gradient(100deg, var(--accent), #6755e8); }
-    .secondary { border: 1px solid #343b50; background: var(--panel); }
+    .btn::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 70%;
+      height: 100%;
+      background: linear-gradient(
+        100deg,
+        transparent,
+        rgba(255,255,255,0.25),
+        transparent
+      );
+      transform: skewX(-20deg);
+      transition: left 0.6s ease;
+      pointer-events: none;
+    }
 
-    section { max-width: 1100px; margin: auto; padding: 75px 24px; scroll-margin-top: 75px; }
-    .section-label { color: var(--cyan); text-transform: uppercase; letter-spacing: 3px; font-size: .78rem; font-weight: bold; }
-    h2 { font-size: clamp(2rem, 5vw, 3rem); margin: 8px 0 22px; letter-spacing: -1px; }
-    .section-intro { color: var(--muted); max-width: 650px; margin-bottom: 30px; }
+    .btn:hover::after {
+      left: 150%;
+    }
 
-    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    /* Sections and cards */
+    .section {
+      padding-block: 70px;
+    }
+
+    .section-heading {
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 650px;
+      margin-bottom: 32px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
 
     .card {
-      background: linear-gradient(145deg, rgba(20,26,42,.95), rgba(12,16,27,.95));
-      border: 1px solid rgba(255,255,255,.08);
+      min-width: 0;
+      padding: 25px;
+      background: var(--panel);
+      border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 26px;
-      transition: transform .25s, border-color .25s;
+      backdrop-filter: blur(12px);
+      transition: transform 0.3s ease,
+                  border-color 0.3s ease,
+                  box-shadow 0.3s ease;
     }
 
-   .card:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: rgba(139,123,255,.85);
-  box-shadow: 0 12px 35px rgba(139,123,255,.18),
-              0 0 18px rgba(84,231,231,.08);
-}
-    .card .icon { font-size: 1.8rem; margin-bottom: 12px; }
-    .card h3 { margin-bottom: 8px; }
-    .card p { color: var(--muted); font-size: .95rem; }
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(139,123,255,0.85);
+      box-shadow: 0 12px 35px rgba(139,123,255,0.18),
+                  0 0 18px rgba(84,231,231,0.08);
+    }
 
-    .gallery-placeholder {
-      min-height: 150px;
+    .card-icon {
+      width: 48px;
+      height: 48px;
       display: grid;
       place-items: center;
-      border-radius: 12px;
-      background: radial-gradient(circle at top right, #39336a, #111827 65%);
-      font-size: 2.5rem;
-      margin-bottom: 16px;
+      border-radius: 14px;
+      color: var(--cyan);
+      background: rgba(84,231,231,0.08);
+      border: 1px solid rgba(84,231,231,0.16);
+      font-size: 1.4rem;
+      margin-bottom: 18px;
     }
 
-    .contact-box {
-      padding: clamp(25px, 5vw, 55px);
-      border: 1px solid rgba(139,123,255,.35);
+    .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    .gallery-card {
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(84,231,231,0.18), transparent 35%),
+        linear-gradient(145deg, rgba(139,123,255,0.18), rgba(19,24,46,0.8));
+    }
+
+    .gallery-label {
+      color: var(--cyan);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+    }
+
+    /* Contact */
+    .contact-panel {
+      padding: clamp(25px, 5vw, 50px);
+      border: 1px solid var(--border);
       border-radius: 24px;
-      background: linear-gradient(130deg, rgba(139,123,255,.10), rgba(84,231,231,.04));
+      background: linear-gradient(
+        120deg,
+        rgba(139,123,255,0.10),
+        rgba(84,231,231,0.05)
+      );
     }
 
-    footer { text-align: center; color: var(--muted); padding: 35px 20px; border-top: 1px solid rgba(255,255,255,.08); }
+    .contact-panel p {
+      color: var(--muted);
+      margin: 10px 0 24px;
+    }
 
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    footer {
+      margin-top: 50px;
+      padding: 28px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
 
     @keyframes rise {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    @media (max-width: 700px) {
-      nav { padding: 15px 18px; }
-      .nav-links { gap: 12px; font-size: .8rem; }
-      .hero { min-height: 70vh; padding-top: 75px; }
-      h1 { letter-spacing: -1.5px; }
-      .cards { grid-template-columns: 1fr; }
-      section { padding: 55px 20px; }
+    @keyframes floatHero {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes glowPulse {
+      from { transform: scale(0.9); opacity: 0.10; }
+      to { transform: scale(1.12); opacity: 0.22; }
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        padding: 15px 18px;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: 18px;
+      }
+
+      main, .section {
+        width: calc(100% - 36px);
+      }
+
+      .hero {
+        min-height: 65vh;
+        padding-block: 75px 55px;
+      }
+
+      h1 {
+        letter-spacing: -1.5px;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding-block: 48px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
-      .reveal { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
+
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      #particle-canvas {
+        display: none;
+      }
     }
-    /* Floating particles and stars */
-.particle {
-  position: fixed;
-  bottom: -20px;
-  width: 12px;
-  height: 12px;
-  background: #54e7e7;
-  border-radius: 50%;
-  opacity: 1;
-  pointer-events: none;
-  z-index: 10;
-  box-shadow: 0 0 10px #54e7e7;
-  animation: particleFloat 12s linear infinite;
-}
-
-.particle:nth-of-type(2n) {
-  background: #8b7bff;
-  box-shadow: 0 0 10px #8b7bff;
-}
-
-@keyframes particleFloat {
-  0% {
-    transform: translateY(0) translateX(0) scale(0.5);
-    opacity: 0;
-  }
-  15% {
-    opacity: 0.7;
-  }
-  85% {
-    opacity: 0.7;
-  }
-  100% {
-    transform: translateY(-110vh) translateX(40px) scale(1.3);
-    opacity: 0;
-  }
-}
   </style>
 </head>
 
 <body>
-  <div class="glow one"></div>
-  <div class="glow two"></div>
+  <div class="background-glow glow-one" aria-hidden="true"></div>
+  <div class="background-glow glow-two" aria-hidden="true"></div>
 
-  <header>
-    <nav>
-      <a class="logo" href="#home">CARONA<span>.</span>PVP</a>
-      <div class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </nav>
-  </header>
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-content">
-        <span class="tag">✦ Welcome to my digital world</span>
-        <h1>Ideas into<br><span>experiences.</span></h1>
-        <p>Hello! I'm Mahesh. This is my personal space to share my interests, ideas, and journey. Explore and get to know me.</p>
-        <div class="buttons">
-          <a class="btn primary" href="#about">Discover more ↗</a>
-          <a class="btn secondary" href="#contact">Get in touch</a>
+  <div class="site">
+    <header>
+      <nav class="nav" aria-label="Main navigation">
+        <a class="logo" href="#home">CARONA<span>.PVP</span></a>
+
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#contact">Contact</a>
         </div>
-      </div>
-    </section>
+      </nav>
+    </header>
 
-    <section id="about" class="reveal">
-      <div class="section-label">A little about me</div>
-      <h2>Curious by nature.</h2>
-      <p class="section-intro">I'm always interested in learning new things, exploring technology, and turning ideas into something useful. This website is a small window into my world.</p>
-      <div class="cards">
-        <article class="card">
-          <div class="icon">⌘</div>
-          <h3>Technology</h3>
-          <p>Exploring technology, coding, and digital creativity.</p>
-        </article>
-        <article class="card">
-          <div class="icon">✧</div>
-          <h3>Learning</h3>
-          <p>Building skills, discovering ideas, and improving every day.</p>
-        </article>
-        <article class="card">
-          <div class="icon">◎</div>
-          <h3>Creativity</h3>
-          <p>Enjoying fresh ideas and finding new ways to express them.</p>
-        </article>
-      </div>
-    </section>
+    <main id="home">
+      <section class="hero">
+        <div class="hero-content">
+          <span class="eyebrow">WELCOME TO MY WEBSITE</span>
 
-    <section id="gallery" class="reveal">
-      <div class="section-label">Selected moments</div>
-      <h2>My gallery.</h2>
-      <p class="section-intro">A space for photos, memories, and things that inspire me. You can add your own pictures here later.</p>
-      <div class="cards">
-        <article class="card">
-          <div class="gallery-placeholder">✦</div>
-          <h3>My world</h3>
-          <p>Moments that make life special.</p>
-        </article>
-        <article class="card">
-          <div class="gallery-placeholder">⌁</div>
-          <h3>My journey</h3>
-          <p>Learning something new, one day at a time.</p>
-        </article>
-        <article class="card">
-          <div class="gallery-placeholder">✧</div>
-          <h3>Inspiration</h3>
-          <p>Ideas that encourage me to keep growing.</p>
-        </article>
-      </div>
-    </section>
+          <h1>
+            Ideas into<br>
+            <span class="gradient-text">experiences.</span>
+          </h1>
 
-    <section id="contact" class="reveal">
-      <div class="contact-box">
-        <div class="section-label">Let's connect</div>
-        <h2>Have something in mind?</h2>
-        <p class="section-intro">I'd be happy to hear from you. Add your preferred contact details and social links when you're ready.</p>
-        <a class="btn primary" href="mailto:">Email me ↗</a>
-      </div>
-    </section>
-  </main>
+          <p>
+            Hello! I'm Mahesh. Welcome to my digital space,
+            where technology, learning, and creativity come together.
+          </p>
 
-  <footer>
-    <p>Designed with curiosity. © <span id="year"></span> Mahesh</p>
-  </footer>
+          <div class="actions">
+            <a class="btn btn-primary" href="#about">Explore More</a>
+            <a class="btn btn-secondary" href="#contact">Contact Me</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <h2 class="section-heading">About <span class="gradient-text">Me</span></h2>
+        <p class="section-intro">
+          A little about the interests and ideas behind this website.
+        </p>
+
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">⌘</div>
+            <h3>Technology</h3>
+            <p>
+              Exploring technology, digital tools, and new ways to solve problems.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">✦</div>
+            <h3>Learning</h3>
+            <p>
+              Learning new skills, building knowledge, and improving every day.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">◇</div>
+            <h3>Creativity</h3>
+            <p>
+              Turning ideas into projects and bringing creative concepts to life.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="gallery">
+        <h2 class="section-heading">My <span class="gradient-text">Gallery</span></h2>
+        <p class="section-intro">
+          A space for projects, ideas, and things I'm working on.
+        </p>
+
+        <div class="card-grid">
+          <article class="card gallery-card">
+            <span class="gallery-label">Project 01</span>
+            <h3>Technology</h3>
+            <p>More projects coming soon.</p>
+          </article>
+
+          <article class="card gallery-card">
+            <span class="gallery-label">Project 02</span>
+            <h3>Creative Ideas</h3>
+            <p>More projects coming soon.</p>
+          </article>
+
+          <article class="card gallery-card">
+            <span class="gallery-label">Project 03</span>
+            <h3>Experiments</h3>
+            <p>More projects coming soon.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="contact-panel">
+          <h2 class="section-heading">
+            Let's <span class="gradient-text">Connect</span>
+          </h2>
+          <p>
+            Have an idea or want to get in touch? I'd be happy to hear from you.
+          </p>
+          <!-- Add your email address to the mailto link when ready. -->
+          <a class="btn btn-primary" href="mailto:">Contact Me</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="year"></span> CARONA.PVP. All rights reserved.
+    </footer>
+  </div>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Update the footer year.
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
+    // Floating particles are drawn on a canvas so they don't
+    // interfere with the website's content or buttons.
+    (() => {
+      const canvas = document.getElementById("particle-canvas");
+      const ctx = canvas.getContext("2d");
+
+      if (!ctx) return;
+
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (reduceMotion) return;
+
+      let width = 0;
+      let height = 0;
+      let particles = [];
+      let animationFrame;
+
+      const colors = [
+        "84, 231, 231",
+        "139, 123, 255",
+        "255, 255, 255"
+      ];
+
+      function resizeCanvas() {
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+        width = window.innerWidth;
+        height = window.innerHeight;
+
+        canvas.width = Math.floor(width * pixelRatio);
+        canvas.height = Math.floor(height * pixelRatio);
+
+        ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+        const count = Math.min(
+          75,
+          Math.max(30, Math.floor((width * height) / 16000))
+        );
+
+        particles = Array.from({ length: count }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 2 + 1,
+          speed: Math.random() * 0.45 + 0.15,
+          drift: (Math.random() - 0.5) * 0.35,
+          alpha: Math.random() * 0.55 + 0.2,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          phase: Math.random() * Math.PI * 2
+        }));
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (const particle of particles) {
+          particle.y -= particle.speed;
+          particle.x += particle.drift +
+            Math.sin(particle.phase) * 0.15;
+          particle.phase += 0.012;
+
+          if (particle.y < -10) {
+            particle.y = height + 10;
+            particle.x = Math.random() * width;
+          }
+
+          if (particle.x < -10) particle.x = width + 10;
+          if (particle.x > width + 10) particle.x = -10;
+
+          ctx.beginPath();
+          ctx.arc(
+            particle.x,
+            particle.y,
+            particle.radius,
+            0,
+            Math.PI * 2
+          );
+
+          ctx.fillStyle =
+            `rgba(${particle.color}, ${particle.alpha})`;
+
+          ctx.shadowBlur = 12;
+          ctx.shadowColor = `rgba(${particle.color}, 0.65)`;
+          ctx.fill();
+        }
+
+        ctx.shadowBlur = 0;
+        animationFrame = requestAnimationFrame(draw);
+      }
+
+      window.addEventListener("resize", resizeCanvas);
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          cancelAnimationFrame(animationFrame);
+        } else {
+          cancelAnimationFrame(animationFrame);
+          draw();
         }
       });
-    }, { threshold: 0.12 });
 
-    document.querySelectorAll(".reveal").forEach(section => observer.observe(section));
- <script>
-  const particleCount = 35;
-    console.log("Particle script is running");
-
-  for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement("div");
-    particle.className = "particle";
-
-    particle.style.left = Math.random() * 100 + "vw";
-    particle.style.animationDelay = Math.random() * 12 + "s";
-    particle.style.animationDuration = (8 + Math.random() * 10) + "s";
-
-    const size = 2 + Math.random() * 4;
-    particle.style.width = size + "px";
-    particle.style.height = size + "px";
-
-    document.body.appendChild(particle);
-  }
-</script>
+      resizeCanvas();
+      draw();
+    })();
+  </script>
 </body>
 </html>
