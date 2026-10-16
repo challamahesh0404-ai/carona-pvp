@@ -157,8 +157,8 @@
     .eyebrow {
       display: inline-block;
       color: var(--cyan);
-      border: 1px solid rgba(84, 231, 231, 0.3);
-      background: rgba(84, 231, 231, 0.06);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      background: rgba(212, 175, 55, 0.06);
       padding: 7px 13px;
       border-radius: 999px;
       font-size: 0.82rem;
@@ -210,7 +210,7 @@
 
     .btn-primary {
       color: #080b18;
-      background: linear-gradient(110deg, var(--accent), var(--cyan));
+      background: linear-gradient(110deg, var(--bg), var(--cyan));
       border: none;
     }
 
@@ -220,8 +220,8 @@
 
     .btn:hover {
       transform: translateY(-4px);
-      box-shadow: 0 0 22px rgba(139,123,255,0.35),
-                  0 0 40px rgba(84,231,231,0.12);
+      box-shadow: 0 0 22px rgba(212,175,55,0.35),
+                  0 0 40px rgba(201,164,92,0.12);
     }
 
     .btn::after {
@@ -283,9 +283,9 @@
 
     .card:hover {
       transform: translateY(-8px) scale(1.02);
-      border-color: rgba(139,123,255,0.85);
-      box-shadow: 0 12px 35px rgba(139,123,255,0.18),
-                  0 0 18px rgba(84,231,231,0.08);
+      border-color: rgba(212,175,55,0.85);
+      box-shadow: 0 12px 35px rgba(212,175,55,0.18),
+                  0 0 18px rgba(201,164,92,0.08);
     }
 
     .card-icon {
@@ -316,12 +316,12 @@
       flex-direction: column;
       justify-content: flex-end;
       background:
-        radial-gradient(circle at 80% 20%, rgba(84,231,231,0.18), transparent 35%),
-        linear-gradient(145deg, rgba(139,123,255,0.18), rgba(19,24,46,0.8));
+        radial-gradient(circle at 80% 20%, rgba(201,164,92,0.18), transparent 35%),
+        linear-gradient(145deg, rgba(212, 175, 55,0.18), rgba(19,24,46,0.8));
     }
 
     .gallery-label {
-      color: var(--cyan);
+      color: var(--accent);
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 1.5px;
@@ -335,7 +335,7 @@
       border-radius: 24px;
       background: linear-gradient(
         120deg,
-        rgba(139,123,255,0.10),
+        rgba(212, 175, 55,0.10),
         rgba(84,231,231,0.05)
       );
     }
@@ -583,8 +583,8 @@
       let animationFrame;
 
       const colors = [
-        "84, 231, 231",
-        "139, 123, 255",
+        "212, 175, 55",
+        "201, 164, 92",
         "255, 255, 255"
       ];
 
