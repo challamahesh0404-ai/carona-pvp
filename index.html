@@ -445,6 +445,39 @@ border: 1px solid rgba(212,175,55,0.16);
         display: none;
       }
     }
+/* Projects category filters */
+.project-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 28px 0 32px;
+}
+
+.project-filter {
+  padding: 9px 18px;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.25s ease,
+              background 0.25s ease,
+              border-color 0.25s ease;
+}
+
+.project-filter:hover,
+.project-filter.active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(212, 175, 55, 0.08);
+}
+
+.project-filter:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
   </style>
 <meta property="og:site_name" content="VYRAKON">
 <meta property="og:title" content="VYRAKON">
