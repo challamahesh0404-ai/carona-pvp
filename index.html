@@ -522,6 +522,15 @@ border: 1px solid rgba(212,175,55,0.16);
   }
 }
 
+@keyframes project-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   #projects .project-art {
     animation: none;
