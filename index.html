@@ -505,6 +505,27 @@ border: 1px solid rgba(212,175,55,0.16);
     linear-gradient(145deg, #17140b, #090909 65%);
 }
 
+/* Gentle gold background shimmer */
+#projects .project-art {
+  background-size: 100% 100%, 200% 200%;
+  animation: artwork-shimmer 8s ease-in-out infinite alternate;
+}
+
+@keyframes artwork-shimmer {
+  from {
+    background-position: 0% 50%, 0% 50%;
+  }
+  to {
+    background-position: 0% 50%, 100% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #projects .project-art {
+    animation: none;
+  }
+}
+
 #projects .project-art::before {
   content: "";
   position: absolute;
