@@ -526,6 +526,25 @@ border: 1px solid rgba(212,175,55,0.16);
   }
 }
 
+/* Gentle floating effect */
+#projects .project-art {
+  animation: project-float 6s ease-in-out infinite;
+}
+
+@keyframes project-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #projects .project-art {
+    animation: none;
+  }
+}
 
 /* Visible moving gold shimmer band */
 #projects .project-art::after {
