@@ -505,10 +505,12 @@ border: 1px solid rgba(212,175,55,0.16);
     linear-gradient(145deg, #17140b, #090909 65%);
 }
 
-/* Gentle gold background shimmer */
+/* Gold shimmer and floating animations */
 #projects .project-art {
   background-size: 100% 100%, 200% 200%;
-  animation: artwork-shimmer 8s ease-in-out infinite alternate;
+  animation:
+    artwork-shimmer 8s ease-in-out infinite alternate,
+    project-float 6s ease-in-out infinite;
 }
 
 @keyframes artwork-shimmer {
