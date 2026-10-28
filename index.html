@@ -450,6 +450,54 @@ border: 1px solid rgba(212,175,55,0.16);
   display: none !important;
 }
 
+
+/* Premium project status badges */
+#projects .gallery-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  padding: 6px 10px;
+  border: 1px solid rgba(212, 175, 55, 0.38);
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.07);
+  color: #d4af37;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+}
+
+#projects .gallery-label::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+#projects .gallery-card {
+  transition: border-color 0.25s ease,
+              background 0.25s ease,
+              transform 0.25s ease;
+}
+
+#projects .gallery-card:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #projects .gallery-card {
+    transition: none;
+  }
+
+  #projects .gallery-card:hover {
+    transform: none;
+  }
+}
+
 /* Projects category filters */
 .project-filters {
   display: flex;
