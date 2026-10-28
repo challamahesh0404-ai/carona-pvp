@@ -465,6 +465,15 @@ border: 1px solid rgba(212,175,55,0.16);
   box-shadow: 0 12px 32px rgba(212, 175, 55, 0.1);
 }
 
+/* Touch feedback for mobile devices */
+@media (hover: none) {
+  #projects .gallery-card:active {
+    border-color: rgba(212, 175, 55, 0.7);
+    box-shadow: 0 0 28px rgba(212, 175, 55, 0.16);
+  }
+}
+
+
 @media (prefers-reduced-motion: reduce) {
   #projects .gallery-card {
     transition: none;
