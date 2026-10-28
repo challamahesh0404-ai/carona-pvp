@@ -533,6 +533,39 @@ border: 1px solid rgba(212,175,55,0.16);
   transform: scaleX(1.55) rotate(52deg);
   border-color: rgba(212, 175, 55, 0.35);
 }
+/* Slow orbital animation */
+#projects .art-orbit-one {
+  animation: orbit-rotate-one 18s linear infinite;
+}
+
+#projects .art-orbit-two {
+  animation: orbit-rotate-two 24s linear infinite;
+}
+
+@keyframes orbit-rotate-one {
+  from {
+    transform: scaleX(1.55) rotate(-28deg);
+  }
+  to {
+    transform: scaleX(1.55) rotate(332deg);
+  }
+}
+
+@keyframes orbit-rotate-two {
+  from {
+    transform: scaleX(1.55) rotate(52deg);
+  }
+  to {
+    transform: scaleX(1.55) rotate(412deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #projects .art-orbit-one,
+  #projects .art-orbit-two {
+    animation: none;
+  }
+}
 
 #projects .art-core {
   display: grid;
