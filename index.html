@@ -451,6 +451,80 @@ border: 1px solid rgba(212,175,55,0.16);
 }
 
 
+/* Gold artwork panels */
+#projects .project-art {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  margin: -24px -24px 22px;
+  overflow: hidden;
+  isolation: isolate;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  background:
+    radial-gradient(circle at 50% 48%, rgba(212, 175, 55, 0.15), transparent 42%),
+    linear-gradient(145deg, #17140b, #090909 65%);
+}
+
+#projects .project-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.25;
+  background-image:
+    linear-gradient(rgba(212, 175, 55, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 175, 55, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+#projects .art-orbit {
+  position: absolute;
+  width: 104px;
+  height: 104px;
+  border: 1px solid rgba(212, 175, 55, 0.75);
+  border-radius: 50%;
+}
+
+#projects .art-orbit-one {
+  transform: scaleX(1.55) rotate(-28deg);
+}
+
+#projects .art-orbit-two {
+  transform: scaleX(1.55) rotate(52deg);
+  border-color: rgba(212, 175, 55, 0.35);
+}
+
+#projects .art-core {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border: 1px solid #d4af37;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #6d5720, #171108 70%);
+  box-shadow: 0 0 32px rgba(212, 175, 55, 0.18);
+  color: #f5e2a0;
+  font-size: 1.4rem;
+  letter-spacing: 0.08em;
+}
+
+#projects .art-caption {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  color: #bda45b;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+}
+
+@media (max-width: 480px) {
+  #projects .project-art {
+    min-height: 150px;
+  }
+}
+
 /* Project coming-soon action */
 #projects .project-action {
   display: flex;
