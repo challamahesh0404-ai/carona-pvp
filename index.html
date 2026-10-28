@@ -451,6 +451,41 @@ border: 1px solid rgba(212,175,55,0.16);
 }
 
 
+/* Project coming-soon action */
+#projects .project-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+#projects .project-action span:last-child {
+  font-size: 1.1rem;
+  transition: transform 0.25s ease;
+}
+
+#projects .gallery-card:hover .project-action span:last-child {
+  transform: translate(2px, -2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #projects .project-action span:last-child {
+    transition: none;
+  }
+
+  #projects .gallery-card:hover .project-action span:last-child {
+    transform: none;
+  }
+}
+
+
 /* Premium project status badges */
 #projects .gallery-label {
   display: inline-flex;
