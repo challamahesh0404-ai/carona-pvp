@@ -741,30 +741,40 @@ border: 1px solid rgba(212,175,55,0.16);
     })();
   </script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const filters = document.querySelectorAll(".project-filter");
-      const cards = document.querySelectorAll("#projects .gallery-card");
+  document.addEventListener("DOMContentLoaded", () => {
+    const filters = document.querySelectorAll(".project-filter");
+    const cards = document.querySelectorAll("#projects .gallery-card");
+    const emptyState = document.getElementById("projects-empty");
 
-      filters.forEach((button) => {
-        button.addEventListener("click", () => {
-          const selectedCategory = button.dataset.filter;
+    filters.forEach((button) => {
+      button.addEventListener("click", () => {
+        const selectedCategory = button.dataset.filter;
 
-          filters.forEach((filterButton) => {
-            const isActive = filterButton === button;
-            filterButton.classList.toggle("active", isActive);
-            filterButton.setAttribute("aria-pressed", String(isActive));
-          });
-
-          cards.forEach((card) => {
-            const matches =
-              selectedCategory === "all" ||
-              card.dataset.category === selectedCategory;
-
-            card.hidden = !matches;
-          });
+        filters.forEach((filterButton) => {
+          const isActive = filterButton === button;
+          filterButton.classList.toggle("active", isActive);
+          filterButton.setAttribute("aria-pressed", String(isActive));
         });
+
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const matches =
+            selectedCategory === "all" ||
+            card.dataset.category === selectedCategory;
+
+          card.hidden = !matches;
+
+          if (matches) {
+            visibleCount++;
+          }
+        });
+
+        emptyState.hidden = visibleCount > 0;
       });
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>
