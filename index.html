@@ -560,6 +560,33 @@ border: 1px solid rgba(212,175,55,0.16);
   }
 }
 
+/* Moving gold highlight */
+#projects .art-orbit-one,
+#projects .art-orbit-two {
+  will-change: transform;
+}
+
+#projects .art-core {
+  animation: core-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes core-glow {
+  from {
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.15);
+  }
+  to {
+    box-shadow:
+      0 0 28px rgba(212, 175, 55, 0.65),
+      0 0 45px rgba(212, 175, 55, 0.25);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #projects .art-core {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   #projects .art-orbit-one,
   #projects .art-orbit-two {
