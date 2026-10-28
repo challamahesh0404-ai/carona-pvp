@@ -1138,6 +1138,24 @@ border: 1px solid rgba(212,175,55,0.16);
     });
   });
 </script>
+<script>
+document.querySelectorAll('#projects .project-art').forEach((art) => {
+  art.addEventListener('pointermove', (event) => {
+    if (event.pointerType === 'touch') return;
 
+    const rect = art.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+    art.style.setProperty('--glow-x', `${x}%`);
+    art.style.setProperty('--glow-y', `${y}%`);
+  });
+
+  art.addEventListener('pointerleave', () => {
+    art.style.setProperty('--glow-x', '50%');
+    art.style.setProperty('--glow-y', '50%');
+  });
+});
+</script>
 </body>
 </html>
