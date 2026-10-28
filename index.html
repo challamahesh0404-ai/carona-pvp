@@ -505,6 +505,26 @@ border: 1px solid rgba(212,175,55,0.16);
     linear-gradient(145deg, #17140b, #090909 65%);
 }
 
+/* Desktop cursor-following gold glow */
+@media (hover: hover) and (pointer: fine) {
+  #projects .project-art {
+    --glow-x: 50%;
+    --glow-y: 50%;
+  }
+
+  #projects .project-art::before {
+    background:
+      radial-gradient(
+        circle at var(--glow-x) var(--glow-y),
+        rgba(212, 175, 55, 0.24),
+        transparent 38%
+      ),
+      linear-gradient(rgba(212, 175, 55, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212, 175, 55, 0.04) 1px, transparent 1px);
+    background-size: auto, 28px 28px, 28px 28px;
+  }
+}
+
 /* Gold shimmer and floating animations */
 #projects .project-art {
   background-size: 100% 100%, 200% 200%;
