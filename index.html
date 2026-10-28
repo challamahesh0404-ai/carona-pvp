@@ -526,6 +526,42 @@ border: 1px solid rgba(212,175,55,0.16);
   }
 }
 
+
+/* Visible moving gold shimmer band */
+#projects .project-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    rgba(212, 175, 55, 0.04) 40%,
+    rgba(255, 226, 130, 0.3) 50%,
+    rgba(212, 175, 55, 0.04) 60%,
+    transparent 75%
+  );
+  background-size: 250% 100%;
+  background-position: 200% 0;
+  animation: gold-shimmer-band 4s linear infinite;
+}
+
+@keyframes gold-shimmer-band {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #projects .project-art::after {
+    animation: none;
+  }
+}
+
+
 #projects .project-art::before {
   content: "";
   position: absolute;
