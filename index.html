@@ -734,5 +734,31 @@ border: 1px solid rgba(212,175,55,0.16);
       draw();
     })();
   </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const filters = document.querySelectorAll(".project-filter");
+      const cards = document.querySelectorAll("#projects .gallery-card");
+
+      filters.forEach((button) => {
+        button.addEventListener("click", () => {
+          const selectedCategory = button.dataset.filter;
+
+          filters.forEach((filterButton) => {
+            const isActive = filterButton === button;
+            filterButton.classList.toggle("active", isActive);
+            filterButton.setAttribute("aria-pressed", String(isActive));
+          });
+
+          cards.forEach((card) => {
+            const matches =
+              selectedCategory === "all" ||
+              card.dataset.category === selectedCategory;
+
+            card.hidden = !matches;
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>
