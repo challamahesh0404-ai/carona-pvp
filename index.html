@@ -823,8 +823,12 @@ border: 1px solid rgba(212,175,55,0.16);
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(0, 0, 0, 0.78);
-  backdrop-filter: blur(8px);
+  background: radial-gradient(
+  circle at center,
+  rgba(212, 175, 55, 0.20) 0%,
+  rgba(0, 0, 0, 0.38) 100%
+);
+  backdrop-filter: blur(3px);
 }
 
 .signup-card {
