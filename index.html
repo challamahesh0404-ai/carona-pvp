@@ -1296,11 +1296,6 @@ document.querySelectorAll('#projects .project-art').forEach((art) => {
     overlay.style.display = "none";
   }
 
-  if (localStorage.getItem(storageKey) === "true") {
-    overlay.style.display = "none";
-    return;
-  }
-
   let remaining = 60;
   skipButton.textContent = "Skip (" + remaining + ")";
 
