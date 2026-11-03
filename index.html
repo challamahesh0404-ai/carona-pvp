@@ -1,4 +1,4 @@
-
+9
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -811,6 +811,102 @@ border: 1px solid rgba(212,175,55,0.16);
 <meta property="og:site_name" content="MAHI STASTILOGICAL">
 <meta property="og:title" content="MAHI STASTILOGICAL">
 </head>
+<style>
+/* MAHISTASTILOGICAL SIGNUP DESIGN */
+
+.signup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(8px);
+}
+
+.signup-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  padding: 35px 25px;
+  background: #101010;
+  border: 1px solid #c9a44c;
+  border-radius: 18px;
+  box-shadow: 0 0 35px rgba(201, 164, 76, 0.15);
+  color: white;
+  text-align: center;
+}
+
+.signup-card h1 {
+  color: #d4af37;
+  font-size: 25px;
+  margin: 35px 0 12px;
+}
+
+.signup-card p {
+  color: #aaa;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.skip-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  color: #d4af37;
+  border: 1px solid #d4af37;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.signup-card input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px;
+  margin: 12px 0;
+  background: #1c1c1c;
+  border: 1px solid #444;
+  border-radius: 8px;
+  color: white;
+}
+
+.signup-card button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  background: #d4af37;
+  color: #080808;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.signup-divider {
+  margin: 20px 0;
+  color: #888;
+}
+
+.social-btn {
+  width: 100%;
+  padding: 13px;
+  margin: 6px 0;
+  background: #191919;
+  color: white;
+  border: 1px solid #555;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.signup-card button:hover {
+  opacity: 0.85;
+}
+</style>
 
 <body>
   <div class="background-glow glow-one" aria-hidden="true"></div>
@@ -1156,6 +1252,74 @@ document.querySelectorAll('#projects .project-art').forEach((art) => {
     art.style.setProperty('--glow-y', '50%');
   });
 });
+</script>
+<!-- MAHISTASTILOGICAL SIGNUP OVERLAY -->
+<div id="signupOverlay" class="signup-overlay">
+  <div class="signup-card">
+
+    <button id="skipSignup" class="skip-btn">
+      Skip (60)
+    </button>
+
+    <h1>WELCOME TO MAHI STASTILOGICAL</h1>
+    <p>Create your account to join the experience.</p>
+
+    <form id="signupForm">
+      <input type="email" placeholder="Email address" required>
+      <input type="password" placeholder="Create password"
+             minlength="8" required>
+      <button type="submit">CREATE ACCOUNT</button>
+    </form>
+
+    <div class="signup-divider">OR</div>
+
+    <button type="button" class="social-btn">
+      Continue with Google
+    </button>
+
+    <button type="button" class="social-btn">
+      Continue with Facebook
+    </button>
+
+  </div>
+</div>
+<script>
+(function () {
+  const overlay = document.getElementById("signupOverlay");
+  const skipButton = document.getElementById("skipSignup");
+  const storageKey = "mahi_signup_seen";
+
+  if (!overlay || !skipButton) return;
+
+  function closeSignup() {
+    localStorage.setItem(storageKey, "true");
+    overlay.style.display = "none";
+  }
+
+  if (localStorage.getItem(storageKey) === "true") {
+    overlay.style.display = "none";
+    return;
+  }
+
+  let remaining = 60;
+  skipButton.textContent = "Skip (" + remaining + ")";
+
+  const countdown = setInterval(function () {
+    remaining--;
+
+    skipButton.textContent = "Skip (" + remaining + ")";
+
+    if (remaining <= 0) {
+      clearInterval(countdown);
+      closeSignup();
+    }
+  }, 1000);
+
+  skipButton.addEventListener("click", function () {
+    clearInterval(countdown);
+    closeSignup();
+  });
+})();
 </script>
 </body>
 </html>
