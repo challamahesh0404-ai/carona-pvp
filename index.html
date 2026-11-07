@@ -1328,9 +1328,9 @@ document.querySelectorAll('#projects .project-art').forEach((art) => {
 
     <div class="signup-divider">OR</div>
 
-    <button type="button" class="social-btn">
-      Continue with Google
-    </button>
+    <button type="button" id="googleSignIn" class="social-btn">
+  Continue with Google
+</button>
 
     <button type="button" class="social-btn">
       Continue with Facebook
@@ -1376,7 +1376,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebas
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  onAuthStateChanged
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -1395,6 +1397,22 @@ const form = document.getElementById("signupForm");
 const overlay = document.getElementById("signupOverlay");
 const message = document.getElementById("signupMessage");
 const button = document.getElementById("createAccountButton");
+const googleButton = document.getElementById("googleSignIn");
+const googleProvider = new GoogleAuthProvider();
+
+googleButton.addEventListener("click", async () => {
+  try {
+    message.textContent = "Opening Google sign-in...";
+
+    await signInWithPopup(auth, googleProvider);
+
+    message.textContent = "Google sign-in successful!";
+    overlay.style.display = "none";
+
+  } catch (error) {
+    message.textContent = error.message;
+  }
+});
 
 onAuthStateChanged(auth, (user) => {
   if (user && overlay) {
