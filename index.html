@@ -1308,12 +1308,23 @@ document.querySelectorAll('#projects .project-art').forEach((art) => {
     <h1>WELCOME TO MAHI STASTILOGICAL</h1>
     <p>Create your account to join the experience.</p>
 
-    <form id="signupForm">
-      <input type="email" placeholder="Email address" required>
-      <input type="password" placeholder="Create password"
-             minlength="8" required>
-      <button type="submit">CREATE ACCOUNT</button>
-    </form>
+  <form id="signupForm">
+  <input id="signupEmail" type="email"
+         placeholder="Email address"
+         autocomplete="email" required>
+
+  <input id="signupPassword" type="password"
+         placeholder="Create password"
+         minlength="6"
+         autocomplete="new-password" required>
+
+  <button id="createAccountButton" type="submit">
+    CREATE ACCOUNT
+  </button>
+</form>
+
+<p id="signupMessage" role="status"
+   style="margin-top:14px;color:#fff0bd;"></p>
 
     <div class="signup-divider">OR</div>
 
@@ -1336,7 +1347,6 @@ document.querySelectorAll('#projects .project-art').forEach((art) => {
   if (!overlay || !skipButton) return;
 
   function closeSignup() {
-    localStorage.setItem(storageKey, "true");
     overlay.style.display = "none";
   }
 
@@ -1359,6 +1369,71 @@ document.querySelectorAll('#projects .project-art').forEach((art) => {
     closeSignup();
   });
 })();
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAgcnH4k9fdl3M5r9qNzUk9fsQjfB5fZsw",
+  authDomain: "mahi-stastilogical.firebaseapp.com",
+  projectId: "mahi-stastilogical",
+  storageBucket: "mahi-stastilogical.firebasestorage.app",
+  messagingSenderId: "715808615130",
+  appId: "1:715808615130:web:8d2858b25e1c6df9ed93e3"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const form = document.getElementById("signupForm");
+const overlay = document.getElementById("signupOverlay");
+const message = document.getElementById("signupMessage");
+const button = document.getElementById("createAccountButton");
+
+onAuthStateChanged(auth, (user) => {
+  if (user && overlay) {
+    overlay.style.display = "none";
+  }
+});
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const email = document.getElementById("signupEmail").value.trim();
+  const password = document.getElementById("signupPassword").value;
+
+  button.disabled = true;
+  button.textContent = "CREATING ACCOUNT...";
+  message.textContent = "Please wait...";
+
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+
+    message.textContent = "Account created successfully!";
+    overlay.style.display = "none";
+
+  } catch (error) {
+    const errors = {
+      "auth/email-already-in-use": "This email already has an account.",
+      "auth/invalid-email": "Enter a valid email address.",
+      "auth/weak-password": "Choose a stronger password.",
+      "auth/operation-not-allowed": "Email registration is not enabled.",
+      "auth/network-request-failed": "Check your internet connection."
+    };
+
+    message.textContent =
+      errors[error.code] || "Registration failed. Please try again.";
+
+    button.disabled = false;
+    button.textContent = "CREATE ACCOUNT";
+  }
+});
 </script>
 </body>
 </html>
