@@ -543,19 +543,18 @@ body {
 
 
 /* Gold artwork panels */
-#projects .project-art {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 180px;
-  margin: -24px -24px 22px;
-  overflow: hidden;
-  isolation: isolate;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
-  background:
-    radial-gradient(circle at 50% 48%, rgba(212, 175, 55, 0.15), transparent 42%),
-    linear-gradient(145deg, #17140b, #090909 65%);
+#projects .art-core {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border: 1px solid #BDD7D8;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #F7CBCA, #D5E5E5 70%);
+  box-shadow: 0 0 32px rgba(189, 215, 216, 0.3);
+  color: #5D6B6B;
+  font-size: 1.4rem;
+  letter-spacing: 0.08em;
 }
 
 /* Desktop cursor-following gold glow */
@@ -661,7 +660,7 @@ body {
   position: absolute;
   width: 104px;
   height: 104px;
-  border: 1px solid rgba(212, 175, 55, 0.75);
+  border-color: rgba(247, 203, 202, 0.8);
   border-radius: 50%;
 }
 
@@ -721,11 +720,11 @@ body {
   place-items: center;
   width: 54px;
   height: 54px;
-  border: 1px solid #d4af37;
+  border: 1px solid #BDD7D8;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #6d5720, #171108 70%);
-  box-shadow: 0 0 32px rgba(212, 175, 55, 0.18);
-  color: #f5e2a0;
+  background: radial-gradient(circle at 35% 30%, #F7CBCA, #D5E5E5 70%);
+  box-shadow: 0 0 32px rgba(189, 215, 216, 0.3);
+  color: #5D6B6B;
   font-size: 1.4rem;
   letter-spacing: 0.08em;
 }
@@ -734,7 +733,7 @@ body {
   position: absolute;
   bottom: 14px;
   left: 16px;
-  color: #bda45b;
+  color: #5D6B6B;
   font-size: 0.62rem;
   letter-spacing: 0.2em;
 }
