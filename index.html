@@ -22,15 +22,16 @@
   <style>
    
 :root {
-  --bg: #080808;
-  --panel: rgba(18, 16, 12, 0.95);
-  --text: #f5f3ed;
-  --muted: #aaa69b;
-  --accent: #d4af37;
-  --cyan: #c9a45c;
-  --border: rgba(212, 175, 55, 0.22);
-  --gold-glow: rgba(212, 175, 55, 0.12);
+  --bg: #F1F7F7;
+  --panel: rgba(255, 255, 255, 0.42);
+  --text: #5D6B6B;
+  --muted: #657777;
+  --accent: #F7CBCA;
+  --cyan: #BDD7D8;
+  --border: rgba(255, 255, 255, 0.75);
+  --gold-glow: rgba(247, 203, 202, 0.18);
 }
+    
 
     * {
       box-sizing: border-box;
@@ -887,8 +888,8 @@ body {
       transparent 55%
     ),
     rgba(221, 211, 211, 0.28);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .signup-card {
@@ -909,10 +910,13 @@ body {
   -webkit-backdrop-filter: blur(28px);
   border: 1px solid rgba(255, 255, 255, 0.85);
   border-radius: 24px;
-  box-shadow:
-    0 20px 60px rgba(93, 107, 107, 0.15),
-    inset 0 1px 1px rgba(255, 255, 255, 0.8);
-}
+  
+box-shadow:
+  0 20px 60px rgba(93, 107, 107, 0.12),
+  0 0 35px rgba(247, 203, 202, 0.22),
+  0 0 45px rgba(189, 215, 216, 0.25),
+  inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  }
 
 .signup-card h1 {
   color: #526768;
