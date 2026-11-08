@@ -128,7 +128,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(241, 247, 247, 0.55);
+  background: rgba(241, 247, 247, 0.42);
   border-bottom: 1px solid rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
@@ -175,7 +175,7 @@ body {
 }
 
 .nav-links a:hover {
-  color: #C18F91;
+  color: #B98285;
 }
 
     /* Main content */
@@ -889,7 +889,7 @@ color: #5D6B6B;
       rgba(189, 215, 216, 0.55),
       transparent 55%
     ),
-    rgba(221, 211, 211, 0.28);
+    rgba(221, 211, 211, 0.18);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
@@ -904,13 +904,13 @@ color: #5D6B6B;
   padding: 35px 25px;
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.72),
+    rgba(255, 255, 255, 0.58),
     rgba(247, 203, 202, 0.32),
     rgba(189, 215, 216, 0.42)
   );
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.95);
   border-radius: 24px;
   
 box-shadow:
@@ -921,14 +921,17 @@ box-shadow:
   }
 
 .signup-card h1 {
-  color: #526768;
-  font-size: 25px;
+  color: #465B5C;
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
   margin: 35px 0 12px;
 }
 
 .signup-card p {
   color: #657777;
   font-size: 14px;
+  line-height: 1.7;
   margin-bottom: 25px;
 }
 
@@ -951,7 +954,7 @@ box-shadow:
   box-sizing: border-box;
   padding: 14px;
   margin: 12px 0;
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.42);
   border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 12px;
   color: #465B5C;
@@ -959,16 +962,17 @@ box-shadow:
 }
 
 .signup-card input::placeholder {
-  color: #879797;
+  color: #657777;
+  opacity: 0.85;
 }
 
 .signup-card form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
-.signup-card button[type="submit"] {
+  .signup-card button[type="submit"] {
   width: 100%;
   padding: 15px;
   margin-top: 12px;
@@ -983,9 +987,12 @@ box-shadow:
   border-radius: 12px;
   font-weight: bold;
   cursor: pointer;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 8px 22px rgba(93, 107, 107, 0.12);
+  transition: all 0.3s ease;
 }
-
+  
 .signup-divider {
   margin: 22px 0;
   color: #657777;
@@ -1013,8 +1020,10 @@ box-shadow:
 }
 
 .signup-card button:hover {
-  opacity: 0.88;
-  }
+  opacity: 1;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(93, 107, 107, 0.18);
+}
   </style>
 
 <body>
@@ -1031,7 +1040,7 @@ box-shadow:
         <div class="nav-links">
           <a href="#home">Home</a>
           <a href="#about">About</a>
-         <a href="#projects">Projects</a>
+         <a href="#projects">Projec</a>
           <a href="#contact">Contact</a>
         </div>
       </nav>
