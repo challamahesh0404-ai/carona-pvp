@@ -1,6 +1,7 @@
                                             challa mahesh babu
                                                +91-9014756418
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,32 +43,39 @@
       scroll-padding-top: 90px;
     }
 
-    body {
-      min-height: 100vh;
-      overflow-x: hidden;
     
-background:
-  radial-gradient(
-    ellipse at 15% 10%,
-    rgba(212, 175, 55, 0.07) 0,
-    transparent 40%
-  ),
-  radial-gradient(
-    ellipse at 90% 45%,
-    rgba(201, 164, 92, 0.04) 0,
-    transparent 35%
-  ),
-  var(--bg);
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
 
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-    }
+  background:
+    radial-gradient(
+      ellipse at 15% 10%,
+      rgba(247, 203, 202, 0.65) 0,
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 90% 45%,
+      rgba(189, 215, 216, 0.65) 0,
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(213, 229, 229, 0.8) 0,
+      transparent 50%
+    ),
+    linear-gradient(
+      135deg,
+      #F1F7F7,
+      #DDD3D3,
+      #D5E5E5
+    );
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+  background-attachment: fixed;
+  color: #5D6B6B;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
 
     /* Animated background effects */
     .background-glow {
@@ -82,18 +90,22 @@ background:
       animation: glowPulse 9s ease-in-out infinite alternate;
     }
 
-    .glow-one {
-      background: var(--accent);
-      top: 0;
-      left: -150px;
-    }
+    
+.glow-one {
+  background: #F7CBCA;
+  top: 0;
+  left: -150px;
+  opacity: 0.35;
+}
 
-    .glow-two {
-      background: var(--cyan);
-      right: -160px;
-      top: 45%;
-      animation-delay: -4s;
-    }
+.glow-two {
+  background: #BDD7D8;
+  right: -160px;
+  top: 45%;
+  animation-delay: -4s;
+  opacity: 0.4;
+}
+    
 
     /* Particle canvas: sits above the background and behind content */
     #particle-canvas {
@@ -111,14 +123,17 @@ background:
     }
 
     /* Navigation */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(8, 8, 8, 0.88);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(18px);
-    }
+  header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(241, 247, 247, 0.55);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 8px 30px rgba(93, 107, 107, 0.07);
+}
+    
 
     .nav {
       max-width: 1120px;
@@ -136,9 +151,10 @@ background:
       letter-spacing: 1.5px;
     }
 
-    .logo span {
-      color: var(--cyan);
-    }
+    
+.logo span {
+  color: #BDD7D8;
+}
 
     .nav-links {
       display: flex;
@@ -147,15 +163,16 @@ background:
       flex-wrap: wrap;
     }
 
-    .nav-links a {
-      color: var(--muted);
-      font-size: 0.94rem;
-      transition: color 0.25s ease;
-    }
+    
+.nav-links a {
+  color: #5D6B6B;
+  font-size: 0.94rem;
+  transition: all 0.25s ease;
+}
 
-    .nav-links a:hover {
-      color: var(--cyan);
-    }
+.nav-links a:hover {
+  color: #C18F91;
+}
 
     /* Main content */
     main, .section {
